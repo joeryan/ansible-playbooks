@@ -1,0 +1,9 @@
+---
+- hosts: webservers
+  remote_user: joe
+  become: yes
+  tasks:
+    - name: install mysql server
+      apt:
+        name: mysql-server
+    

@@ -1,0 +1,12 @@
+---
+- hosts: webservers
+  remote_user: joe
+  become: yes
+  tasks:
+    - name: install php for apache
+      apt:
+        pkg:
+        - php
+        - libapache2-mod-php
+        - php-mysql
+    

@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  remote_user: joe
+  become: yes
+  tasks:
+    - name: install desktop applications
+      apt:
+        update_cache: yes
+        state: latest
+        autoclean: yes
+        pkg:
+        - krdc
+        - yakuake
