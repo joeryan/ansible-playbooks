@@ -11,3 +11,14 @@
         pkg:
         - krdc
         - yakuake
+        - gconf2
+        - gconf-service
+        - gvfs-bin
+        - libappindicator1
+    - name: install Slack
+      debug:
+        msg: Update with details
+    - name: install vscode
+      debug:
+        msg: update with details
+
