@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    - vagant_ver: 2.2.7
+  tasks:
+
+  - name: install required packages
+    apt:
+      name:
+      - qemu-kvm
+      - libvirt-dev
+      - virt-top
+      - libguestfs-tools
+      - virtinst
+      - bridge-utils        
+  - name: load kvm kernel module at boot
+    lineinfile:
+      path: /etc/modules
+      line: vhost_net
+    
+#  - name: download vagrant from hashicorp
