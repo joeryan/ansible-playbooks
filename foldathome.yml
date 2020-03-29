@@ -29,9 +29,18 @@
     apt:
       deb: /tmp/fahclient_current.deb
       state: present
+    notify: fahclient_service
 
   - name: update configuration file
     template:
       src: templates/fahclient-config.xml.j2
       dest: /etc/fahclient/config.xml
+    notify: fahclient_service
 
+  handlers:
+  - name: fahclient service restart
+    sysvinit:
+      name: FAHClient
+      enabled: yes
+      state: restarted
+    listen: fahclient_service
