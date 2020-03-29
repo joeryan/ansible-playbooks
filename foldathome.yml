@@ -1,0 +1,36 @@
+---
+- hosts: "{{ target }} "
+  become: yes
+  tasks:
+  - name: install opencl-dev
+    apt:
+      name: nvidia-opencl-dev
+      state: latest
+  - name: install cuda tools
+    apt:
+      name: nvidia-cuda-toolkit
+      state: latest
+
+  - name: install remaining dependencies
+    apt:
+      name:
+      - freeglut3
+      - libgl1-mesa-glx
+      - dh-python
+      - python-gtk2
+      - ocl-icd-opencl-dev
+      state: present
+  - name: copy folding client from ansible server
+    copy:
+      src: /mnt/backups/software/fahclient_current.deb
+      dest: /tmp/fahclient_current.deb
+  - name: install folding client
+    apt:
+      deb: /tmp/fahclient_current.deb
+      state: present
+
+  - name: update configuration file
+    template:
+      src: templates/fahclient-config.xml.j2
+      dest: /etc/fahclient/config.xml
+

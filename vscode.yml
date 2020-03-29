@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+
+  - name: install vs-code with dpkg
+    apt:
+      deb: /mnt/backups/software/vs-code.deb
+      state: present
+ 
