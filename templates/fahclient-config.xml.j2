@@ -1,0 +1,34 @@
+<config>
+
+  <!-- See sample config: /usr/share/doc/fahclient/sample-config.xml -->
+
+  <!-- Client Control 
+       Don't fold anonymously, provide user info. -->
+  <fold-anon v='false'/>
+
+  <!-- Folding Slot Configuration -->
+  <gpu v='true'/>  <!-- If true, attempt to autoconfigure GPUs -->
+
+  <!-- Slot Control
+       Options: light, medium or full
+       Watch out for high load -->
+  <power v='{{ folding_slot_control }}'/>
+
+  <!-- User Information
+       Send all those points to team NairobiLUG 229502
+       http://fah-web2.stanford.edu/cgi-bin/main.py?qtype=teampage&teamnum=229502 -->
+  <user v='{{ folding_donor }}'/>
+  <team v='{{ folding_team }}'/>
+
+  <!-- Folding Slots -->
+  <!-- Use all the CPUs
+       Watch out for high load -->
+  <slot id='0' type='CPU'/>
+  <slot id='1' type='GPU'/>
+
+  <!-- Grant Remote Web Access
+       access web UI at 192.168.1.63:7396 -->
+  <allow>{{ folding_control_node }}</allow>
+  <web-allow>{{ folding_control_node }}</web-allow>
+
+</config>

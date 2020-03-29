@@ -12,6 +12,7 @@
       state: latest
 
   - name: install remaining dependencies
+  # nvidia-libopencl1-384 nvidia-384-dev nvidia-384 libcuda1-384 python3-pycuda python-pycuda nvidia-cuda-toolkit
     apt:
       name:
       - freeglut3
