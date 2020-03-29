@@ -27,8 +27,8 @@
   <slot id='1' type='GPU'/>
 
   <!-- Grant Remote Web Access
-       access web UI at 192.168.1.63:7396 -->
-  <allow>{{ folding_control_node }}</allow>
-  <web-allow>{{ folding_control_node }}</web-allow>
+       access web UI at LAN IP address -->
+  <allow>127.0.0.1 {{ folding_control_node }}</allow>
+  <web-allow>127.0.0.1 {{ folding_control_node }}</web-allow>
 
 </config>
