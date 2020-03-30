@@ -1,4 +1,11 @@
 ---
+### required vars and defaults:  
+  # folding_slot_control: medium
+  # folding_donor: anonymous
+  # folding_team: 
+  # folding_control_node: localhost only
+  # use_gpu: false
+  # gpu_list: 
 - hosts: "{{ target }} "
   become: yes
   tasks:

@@ -1,37 +1,48 @@
 <config>
 
   <!-- See sample config: /usr/share/doc/fahclient/sample-config.xml -->
-
-  <!-- Client Control 
-       Don't fold anonymously, provide user info. -->
-  <fold-anon v='false'/>
-
-  <!-- Folding Slot Configuration -->
-  <gpu v='true'/>  <!-- If true, attempt to autoconfigure GPUs -->
-
-  <!-- Slot Control
+<!-- Slot Control
        Options: light, medium or full
        Watch out for high load -->
   <power v='{{ folding_slot_control }}'/>
 
   <!-- User Information
-       Send all those points to team NairobiLUG 229502
-       http://fah-web2.stanford.edu/cgi-bin/main.py?qtype=teampage&teamnum=229502 -->
+  {% if folding_donor %}
+       Don't fold anonymously, provide user info. -->
+  <fold-anon v='false'/>
   <user v='{{ folding_donor }}'/>
+  {% else %}
+     donating processing power anonymously -->
+  <fold-anon v='true'/>
+  {% endif %}
+
+  {% if folding_team %}  
   <team v='{{ folding_team }}'/>
+  {% else %}
+  <team v='0' />
+  {% endif %}
 
   <!-- Folding Slots -->
-  <!-- Use all the CPUs
-       Watch out for high load -->
+  {% if use_cpu %}
   <slot id='0' type='CPU'/>
-  <slot id='1' type='GPU'/>
+  {% endif %}
+
+  {% for gpu in gpu_list %}
+  <slot id='{{ loop.index }}' type='GPU'/>
+  <!-- GPU: {{ gpu }} -->
+
+  {% endfor %}
 
   <!-- Grant Remote Web Access
        access web UI at LAN IP address -->
   <allow>127.0.0.1 {{ folding_control_node }}</allow>
   <web-allow>127.0.0.1 {{ folding_control_node }}</web-allow>
 
+{% if folding_control_pass %}
+  <password>{{ folding_control_pass }}</password>
+{% else %}
   <!-- remote command server with no password -->
-  <command-allow-no-pass v='127.0.0.1 192.168.11.15'/>
+  <command-allow-no-pass v='127.0.0.1 {{ folding_control_node }}'/>
+{% endif %}
 
 </config>
