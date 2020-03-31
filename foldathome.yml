@@ -1,6 +1,7 @@
 ---
-### playbook currently works only for Ubuntu 16.04/19.04, and possibly Debian based distros
-### required vars and defaults:  
+## playbook currently works only for Ubuntu 16.04/19.04, and possibly Debian based distros
+## user must download the current fahclient .deb to the control node before running the playbook
+## required vars and defaults:  
   # folding_slot_control: medium
   # folding_donor: anonymous
   # folding_team: 0 (this indicates no team)
