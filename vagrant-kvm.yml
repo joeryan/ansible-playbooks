@@ -1,10 +1,10 @@
 ---
 - hosts: localhost
-  become: yes
   vars:
     - vagrant_ver: 2.2.7
   tasks:
     - name: install required packages for kvm
+      become: yes
       apt:
         name:
         - qemu-kvm
@@ -14,15 +14,23 @@
         - virtinst
         - bridge-utils        
     - name: load kvm kernel module at boot (kvm modules will need to be loaded manually if needed before reboot)
+      become: yes
       lineinfile:
         path: /etc/modules
         line: vhost_net
       
     - name: download vagrant from hashicorp
+      become: yes
       get_url:
         url: "https://releases.hashicorp.com/vagrant/{{ vagrant_ver }}/vagrant_{{ vagrant_ver }}_x86_64.deb"
         dest: /tmp/vagrant_current.deb
-      notify: install vagrant
+        
+    - name: install vagrant from downloaded .deb file
+      become: yes
+      apt: 
+        deb: /tmp/vagrant_current.deb
+        state: present
+        dpkg_options: force-depends,force-confdef,force-confold
 
     - name: install vagrant libvirt plugin
       command: vagrant plugin install vagrant-libvirt
@@ -31,15 +39,3 @@
     - name: output the vagrant-libvirt plugin installation results
       debug:
         msg: "{{ plugin_results }}"
-
-
-  handlers:
-    name: install vagrant from downloaded .deb file
-    apt: 
-      deb: /tmp/vagrant_current.deb
-      state: latest
-      dpkg_options: 
-      - force-depends
-      - force-confdef
-      - force-confold
-    listen: install vagrant
