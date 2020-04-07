@@ -1,9 +1,11 @@
 ---
-- hosts: webservers
+- hosts: "{{ target }}"
   remote_user: joe
   become: yes
   tasks:
     - name: install mysql server
       apt:
         name: mysql-server
+        status: present
+        enable: true
     

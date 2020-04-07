@@ -15,10 +15,11 @@
         - gconf-service
         - gvfs-bin
         - libappindicator1
+        - keepassxc
     - name: install Slack
       debug:
-        msg: Update with details
+        msg: Update with actual install details
     - name: install vscode
       debug:
-        msg: update with details
+        msg: update with actual install details
 

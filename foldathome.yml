@@ -11,6 +11,10 @@
   # fahclient_current_version: (required, download from https://foldingathome.org/start-folding/)
 - hosts: folding
   become: yes
+  vars_files:
+  - /home/joe/ansible/group_vars/folding.yml
+  vars:
+  - folding_control_pass: false
   tasks:
   - name: install opencl-dev
     apt:

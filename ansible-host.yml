@@ -1,0 +1,14 @@
+---
+- hosts: ansible_host
+  vars: 
+    galaxy_playbooks: 
+    - dj-wasabi.zabbix-server
+    - dj-wasabi.zabbix-web
+    - dj-wasabi.zabbix-agent
+    - dj-wasabi.zabbix-proxy
+    - sparknsh.mariadb
+
+  tasks: 
+  - name: install galaxy roles
+    command: ansible-galaxy install "{{ item }} "
+    loop:  "{{ galaxy_playbooks }}"

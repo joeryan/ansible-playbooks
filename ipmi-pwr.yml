@@ -1,0 +1,27 @@
+---
+- hosts: ipmi_nodes
+  gather_facts: no
+  tasks:
+  - name: turn on power through IPMI 
+    raw: racadm serveraction powerup
+    tags:
+    - pwrup
+    - never
+
+  - name: check power status on IPMI
+    raw: racadm serveraction powerstatus
+    register: ipmi_pwrstatus
+    tags:
+    - pwrstats
+
+  - debug: 
+      var: ipmi_pwrstatus.stdout
+    tags:
+    - pwrstats
+
+  - name: shut power off through IPMI
+    raw: racadm serveraction powerdown
+    tags:
+    - pwrdown
+    - never
+    
